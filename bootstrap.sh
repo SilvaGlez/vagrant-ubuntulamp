@@ -33,6 +33,10 @@ sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/app-pass password $
 sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2"
 sudo apt-get -y install phpmyadmin
 
+echo -e "\n--- Installa nodeJs ---\n"
+sudo apt install nodejs
+sudo apt install npm
+
 # echo -e "\n--- Crea Virtual Host ---\n"
 # VHOST=$(cat <<EOF
 # <VirtualHost *:80>
