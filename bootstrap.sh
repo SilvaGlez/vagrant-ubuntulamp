@@ -52,7 +52,7 @@ sudo apt install npm
 # EOF
 # )
 
-echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
+# echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
 
 echo -e "\n--- Crea index.php ---\n"
 sudo rm /var/www/html/index.html
