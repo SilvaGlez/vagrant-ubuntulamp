@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
     # Use vagrant up --provision to rerun the provisioner
     config.vm.provision "shell" do |s|
         s.path = "bootstrap.sh"
-        s.args = [ settings['site']['ip'], settings['site']['sitename'], settings['site']['database'], settings['site']['mysqlpassword'] ]
+        s.args = [ settings['site']['ip'], settings['site']['sitename'], settings['site']['database'], settings['site']['mysqlpassword'], settings['site']['phpmyadminpassword']  ]
     end
 
     config.vm.provision "shell", :run => 'always', inline: <<-SHELL
