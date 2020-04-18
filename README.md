@@ -25,7 +25,7 @@ Personal configuration for the setup of a basic LAMP server with Vagrant.
 ## Installation
 Clone the repository
 ```
-$ git clone https://github.com/davidecesarano/config-vagrant-lamp.git
+$ git clone https://github.com/SilvaGlez/vagrant-ubuntulamp.git
 ```
 
 ## Usage
