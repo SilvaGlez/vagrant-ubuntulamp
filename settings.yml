@@ -2,6 +2,7 @@
 site:
   ip: 192.168.33.10 # virtual machine ip address
   sitename: loky.dev # virtual machine domain eg http://loky.dev
-  database: database_name # create default database
+  database: database_test # create default database
   mysqlpassword: password # mysql root password
+  phpmyadminpassword: password # mysql root password
   virtualmemory: 2048 # virtual machine memory
