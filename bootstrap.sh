@@ -1,4 +1,4 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 
 PASSWORD='vagrant'
 IP_ADDRESS=$1
