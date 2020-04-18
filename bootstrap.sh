@@ -5,6 +5,7 @@ IP_ADDRESS=$1
 SITE_NAME=$2
 DATABASE_NAME=$3
 MYSQL_PASSWORD=$4
+PHPMYADMIN_PASSWORD=$5
 
 echo -e "\n--- Aggiorna l'indice dei pacchetti ---\n"
 sudo apt-get update
@@ -20,15 +21,15 @@ sudo apt-get update
 sudo apt install -y php7.1 libapache2-mod-php7.1 php7.1-common php7.1-mbstring php7.1-xmlrpc php7.1-soap php7.1-gd php7.1-xml php7.1-intl php7.1-mysql php7.1-cli php7.1-mcrypt php7.1-zip php7.1-curl
 
 echo -e "\n--- Installa MySQL ---\n"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $PASSWORD"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_PASSWORD"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_PASSWORD"
 sudo apt-get -y install mysql-server
 
 echo -e "\n--- Installa phpMyAdmin ---\n"
 sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/dbconfig-install boolean true"
-sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/app-password-confirm password $PASSWORD"
-sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/admin-pass password $PASSWORD"
-sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/app-pass password $PASSWORD"
+sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/app-password-confirm password $PHPMYADMIN_PASSWORD"
+sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/admin-pass password $PHPMYADMIN_PASSWORD"
+sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/app-pass password $PHPMYADMIN_PASSWORD"
 sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2"
 sudo apt-get -y install phpmyadmin
 
@@ -70,11 +71,11 @@ echo -e "\n--- Installa Composer ---\n"
 curl -s https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 
-if [ $MYSQL_PASSWORD != 'password' ];
-then
-    echo "Updating MySQL root password..."
-    mysql -uroot -ppassword -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$MYSQL_PASSWORD'); FLUSH PRIVILEGES;"
-fi
+# if [ $MYSQL_PASSWORD != 'password' ];
+# then
+#     echo "Updating MySQL root password..."
+#     mysql -uroot -ppassword -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$MYSQL_PASSWORD'); FLUSH PRIVILEGES;"
+# fi
 
 echo "Creating database, if it doesn't already exist..."
 mysql -uroot -p$MYSQL_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DATABASE_NAME;"
